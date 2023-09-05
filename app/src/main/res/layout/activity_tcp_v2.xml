@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/act_tcp_v2_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:centerText="Hante Tcp V2"
+        app:centerTextColor="#000000"
+        app:centerTextSize="18sp"
+        app:centerType="textView"
+        app:fillStatusBar="true"
+        app:leftImageResource="@mipmap/back1"
+        app:leftType="imageButton"
+        app:statusBarColor="@android:color/white"
+        app:statusBarMode="light"
+        app:titleBarColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dip"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/device_sn_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="SN" />
+
+                <Button
+                    android:id="@+id/device_config_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Check Config"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/device_search_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_red_bg"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/white"
+                    android:text="扫码连接POS"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/ip_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="IP" />
+
+                <TextView
+                    android:id="@+id/merchant_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="merchantNo" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/device_id_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="deviceId" />
+
+                <EditText
+                    android:id="@+id/device_key_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="token" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <Button
+                    android:id="@+id/connect_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Connect POS"
+                    android:enabled="false"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></Button>
+
+                <Button
+                    android:id="@+id/stop_connect_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Disconnect POS"
+                    android:enabled="false"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></Button>
+
+                <Button
+                    android:id="@+id/merchant_search_token_btn"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Search Token"
+                    android:visibility="gone"
+                    android:textColor="@color/white"></Button>
+
+                <Button
+                    android:id="@+id/merchant_reset_pair_btn"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="ReSet POS Pair"
+                    android:textAllCaps="false"
+                    android:visibility="gone"
+                    android:textColor="@color/white"></Button>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/token_verify_code_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Verify Code" />
+
+                <Button
+                    android:id="@+id/merchant_create_token_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="创建token"></Button>
+
+                <Button
+                    android:id="@+id/merchant_check_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Check"
+                    android:textAllCaps="false"></Button>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/reconnection_time_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="断开重连时长(单位/秒)"
+                    android:inputType="number"
+                    android:text="15" />
+
+                <Button
+                    android:id="@+id/reconnection_time_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="设置断开重连时长" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/status_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#999999"
+                android:padding="5dp"
+                android:text="状态:"
+                android:textColor="@color/white">
+
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/credit_card_sign_in_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="密码"
+                    android:text="Hante2023!!@" />
+
+                <Button
+                    android:id="@+id/credit_card_sign_in_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="信用卡签到" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="amount"
+                    android:inputType="number"
+                    android:text="1" />
+
+                <EditText
+                    android:id="@+id/et_tax_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Tax"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/et_tip_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:hint="Tip"
+                    android:inputType="number" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/et_amount_pro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$0.01" />
+                <TextView
+                    android:id="@+id/et_tax_amount_pro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Tax"
+                    android:text="$0.00" />
+                <TextView
+                    android:id="@+id/et_tip_amount_pro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:hint="Tip"
+                    android:text="$0.00" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Remark"
+                android:inputType="text"
+                android:text="Test" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/checkstand_btn"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="SALE"
+                    android:enabled="false"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></Button>
+
+                <Button
+                    android:id="@+id/card_num_payment_btn"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="KeyIn"
+                    android:enabled="false"
+                    android:layout_marginLeft="5dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    android:id="@+id/auth_btn"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Auth"
+                    android:visibility="gone"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/qrcode_collection_btn"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Qr Code"
+                    android:enabled="false"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></Button>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/qrcode_scan_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Scan QR code"
+                    android:textAllCaps="false"
+                    android:enabled="false"
+                    android:textColor="@color/white"></Button>
+
+                <Button
+                    android:id="@+id/checkout_counter_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="收银台"
+                    android:visibility="gone"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></Button>
+
+                <Button
+                    android:id="@+id/checkout_ebt_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="EBT"
+                    android:visibility="gone"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></Button>
+
+                <Button
+                    android:id="@+id/refresh_order_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="更新订单"
+                    android:visibility="gone"></Button>
+
+
+
+
+                <Button
+                    android:id="@+id/checkout_cancel_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Cancel collection"
+                    android:layout_marginLeft="5dp"
+                    android:enabled="false"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></Button>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/upload_order_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上报订单"
+                    android:visibility="gone"></Button>
+
+                <Button
+                    android:id="@+id/cancel_order_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="取消上报"
+                    android:visibility="gone"></Button>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/reconnection_order_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Order number"></TextView>
+
+            <EditText
+                android:id="@+id/order_tr_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Transaction number"></EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/checkout_close_countdown_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Close countdown"
+                    android:textAllCaps="false"
+                    android:enabled="false"
+                    android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/query_order_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Search Order"
+                    android:textAllCaps="false"
+                    android:enabled="false"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    android:id="@+id/void_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Void"
+                    android:visibility="gone"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/query_order_list_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Order Record"
+                    android:textAllCaps="false"
+                    android:enabled="false"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/refund_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Refund amount"
+                    android:inputType="number"></EditText>
+
+                <TextView
+                    android:id="@+id/refund_et_pro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$0.00" />
+
+                <Button
+                    android:id="@+id/refund_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Refund"
+                    android:enabled="false"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></Button>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/capture_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Amount"
+                    android:inputType="number"></EditText>
+
+                <EditText
+                    android:id="@+id/capture_tip_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Tip"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/capture_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="capture"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/oder_sign_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/query_oder_sign_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:text="Signature"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Request:"/>
+
+            <TextView
+                android:id="@+id/param_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Response:"/>
+
+            <TextView
+                android:id="@+id/result_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

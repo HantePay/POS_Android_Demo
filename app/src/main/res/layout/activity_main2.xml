@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/act_tcp_v2_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:centerText="Hante POS Demo"
+        app:centerTextColor="#000000"
+        app:centerTextSize="18sp"
+        app:centerType="textView"
+        app:fillStatusBar="true"
+        app:statusBarColor="@android:color/white"
+        app:statusBarMode="light"
+        app:titleBarColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_tcp_v1"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/btn_red"
+                android:text="Sunmi P/V 系列机器"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_tcp_v2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_red"
+                android:text="Sunmi FT2/Smart Pad 机器"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+
+            <Button
+                android:id="@+id/btn_tcp_cloud"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:text="Cloud"
+                android:visibility="gone" />
+
+
+            <Button
+                android:id="@+id/btn_bluetooth_v2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:text="Bluetooth V2"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_usb_v2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:text="USB V2"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_usb_port"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:text="USB Port"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

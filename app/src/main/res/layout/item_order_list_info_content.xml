@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#F7F7F7"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_item_transaction_record_paytime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            tools:text="18:60"
+            android:textColor="#333333" />
+
+        <TextView
+            android:id="@+id/tv_item_transaction_record_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/tv_item_transaction_record_paytime"
+            android:textColor="#333333"
+            android:lines="1"
+            tools:text="$30"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/iv_item_transaction_record_pay_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_cancel"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/color_button_red"
+            android:textSize="14sp"
+            tools:text="App" />
+
+        <TextView
+            android:id="@+id/tv_item_transaction_record_ordertype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="收款"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_cancel"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/color_button_red"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_refunded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:autoSizeMaxTextSize="15dp"
+            tools:text="已退-$30"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_cancel"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:textSize="14sp"
+            android:textColor="@color/color_button_red" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_item_transaction_record_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:ellipsize="end"
+        android:layout_marginBottom="5dp"
+        android:lines="1"
+        android:textColor="#333333" />
+
+    <RelativeLayout
+        android:layout_width="40dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_item_transaction_record_payicon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/iv_order_change"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_refunded"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DCDCDC" />
+</LinearLayout>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TcpDemo</string>
+    <string name="activity_transaction_record_amount_remote_order">%1$s%2$.2f</string>
+    <string name="activity_transaction_record_amount_rbm">%1$s%2$.2f(%3$s%4$.2f)</string>
+    <string name="activity_transaction_record_item_order_type_wait_pay">Pending</string>
+    <string name="activity_transaction_record_item_order_type_closed">Closed</string>
+    <string name="activity_transaction_record_item_order_type_receipt">Receipt</string>
+    <string name="activity_transaction_record_item_order_type_refunded">Refunded %1$s%2$.2f</string>
+    <string name="activity_transaction_record_item_order_type_pending_authorization">Pending authorization</string>
+    <string name="activity_transaction_record_item_order_type_authorized">Authorized</string>
+    <string name="activity_transaction_record_item_order_type_authorization_failed">Authorized failed</string>
+    <string name="activity_transaction_record_item_order_type_consumption_withdrawal">Consumption withdrawal</string>
+    <string name="activity_transaction_record_item_order_type_refund">Refund</string>
+</resources>

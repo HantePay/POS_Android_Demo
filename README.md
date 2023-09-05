@@ -1,0 +1,1 @@
+"# POS_Android_Demo" Sunmi V/P 系列设备

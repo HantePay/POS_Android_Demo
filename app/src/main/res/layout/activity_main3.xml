@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity2">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/act_bt_client_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:centerText="TCP Demo"
+        app:centerTextColor="#000000"
+        app:centerTextSize="18sp"
+        app:centerType="textView"
+        app:fillStatusBar="true"
+        app:rightTextColor="#000000"
+        app:statusBarColor="@android:color/white"
+        app:statusBarMode="light"
+        app:titleBarColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/act_main_version_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="20dp"
+                />
+            <Button
+                android:id="@+id/btn_tcp_v1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TCP V1"
+                android:background="@drawable/btn_red"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_tcp_v2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_red"
+                android:text="TCP V2"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+
+            <Button
+                android:id="@+id/btn_transaction_Record"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_red"
+                android:text="Transaction Record"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_tcp_settings"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_red"
+                android:text="Settings"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
