@@ -1,5 +1,9 @@
 package com.hante.tcpdemo.net;
 
+import com.hante.tcp.bean.v2.POSOrderQuery;
+import com.hante.tcpdemo.bean.OrderInfo;
+import com.hante.tcpdemo.bean.OrderInfoResponse;
+
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -36,7 +40,16 @@ public interface HttpApi {
      * @param bodyParams
      * @return
      */
-    @POST("https://test.hantepay.cn/route/v2.0.0/order/list/{userNo}")
+    @POST("http://test.hantepay.cn/route/v2.0.0/order/list/{userNo}")
     Observable<BaseResponse<OrderListResponse>> getOrderList(@Path("userNo") String userNo, @Body Map<String, Object> bodyParams);
+
+    /**
+     * 本地POS服务，查询订单
+     * @param bodyParams
+     * @return
+     */
+    @POST("api/pos")
+    Observable<OrderInfoResponse> queryOrder(@Body POSOrderQuery bodyParams);
+
 
 }

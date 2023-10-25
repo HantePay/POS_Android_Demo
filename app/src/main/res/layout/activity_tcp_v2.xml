@@ -58,12 +58,11 @@
                     android:id="@+id/device_search_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_red_bg"
-                    android:textAllCaps="false"
                     android:layout_marginLeft="10dp"
-                    android:textColor="@color/white"
+                    android:background="@drawable/btn_red_bg"
                     android:text="扫码连接POS"
-                    />
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
@@ -90,8 +89,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/device_id_et"
@@ -111,9 +110,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/connect_btn"
@@ -121,8 +120,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
-                    android:text="Connect POS"
                     android:enabled="false"
+                    android:text="Connect POS"
                     android:textAllCaps="false"
                     android:textColor="@color/white"></Button>
 
@@ -133,33 +132,33 @@
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
-                    android:text="Disconnect POS"
                     android:enabled="false"
+                    android:text="Disconnect POS"
                     android:textAllCaps="false"
                     android:textColor="@color/white"></Button>
 
                 <Button
                     android:id="@+id/merchant_search_token_btn"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
                     android:text="Search Token"
-                    android:visibility="gone"
-                    android:textColor="@color/white"></Button>
+                    android:textColor="@color/white"
+                    android:visibility="gone"></Button>
 
                 <Button
                     android:id="@+id/merchant_reset_pair_btn"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
                     android:text="ReSet POS Pair"
                     android:textAllCaps="false"
-                    android:visibility="gone"
-                    android:textColor="@color/white"></Button>
+                    android:textColor="@color/white"
+                    android:visibility="gone"></Button>
             </LinearLayout>
 
 
@@ -283,6 +282,7 @@
                     android:hint="Tip"
                     android:inputType="number" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -295,6 +295,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="$0.01" />
+
                 <TextView
                     android:id="@+id/et_tax_amount_pro"
                     android:layout_width="match_parent"
@@ -302,6 +303,7 @@
                     android:layout_weight="1"
                     android:hint="Tax"
                     android:text="$0.00" />
+
                 <TextView
                     android:id="@+id/et_tip_amount_pro"
                     android:layout_width="match_parent"
@@ -331,47 +333,47 @@
                 <Button
                     android:id="@+id/checkstand_btn"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
-                    android:text="SALE"
                     android:enabled="false"
+                    android:text="SALE"
                     android:textAllCaps="false"
                     android:textColor="@color/white"></Button>
 
                 <Button
                     android:id="@+id/card_num_payment_btn"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_red_bg"
-                    android:text="KeyIn"
-                    android:enabled="false"
                     android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
+                    android:text="KeyIn"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/auth_btn"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
                     android:text="Auth"
-                    android:visibility="gone"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/qrcode_collection_btn"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
-                    android:text="Qr Code"
                     android:enabled="false"
+                    android:text="Qr Code"
                     android:textAllCaps="false"
                     android:textColor="@color/white"></Button>
 
@@ -389,9 +391,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
                     android:text="Scan QR code"
                     android:textAllCaps="false"
-                    android:enabled="false"
                     android:textColor="@color/white"></Button>
 
                 <Button
@@ -401,9 +403,9 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/btn_red_bg"
                     android:text="收银台"
-                    android:visibility="gone"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"></Button>
+                    android:textColor="@color/white"
+                    android:visibility="gone"></Button>
 
                 <Button
                     android:id="@+id/checkout_ebt_btn"
@@ -412,9 +414,9 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/btn_red_bg"
                     android:text="EBT"
-                    android:visibility="gone"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"></Button>
+                    android:textColor="@color/white"
+                    android:visibility="gone"></Button>
 
                 <Button
                     android:id="@+id/refresh_order_btn"
@@ -425,17 +427,15 @@
                     android:visibility="gone"></Button>
 
 
-
-
                 <Button
                     android:id="@+id/checkout_cancel_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
-                    android:text="Cancel collection"
-                    android:layout_marginLeft="5dp"
                     android:enabled="false"
+                    android:text="Cancel collection"
                     android:textAllCaps="false"
                     android:textColor="@color/white"></Button>
 
@@ -464,19 +464,58 @@
 
             </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/reconnection_order_et"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Order number"></TextView>
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/order_tr_et"
+                <EditText
+                    android:id="@+id/reconnection_order_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="POS Order number"
+                    android:inputType="text"></EditText>
+
+                <Button
+                    android:id="@+id/query_pos_order_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
+                    android:text="Http Search"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Transaction number"></EditText>
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/order_tr_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Hante Transaction number"
+                    android:inputType="number"></EditText>
+
+                <Button
+                    android:id="@+id/query_order_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
+                    android:text="Search Order"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -491,20 +530,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
                     android:text="Close countdown"
                     android:textAllCaps="false"
-                    android:enabled="false"
-                    android:textColor="@color/white"/>
-                <Button
-                    android:id="@+id/query_order_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/btn_red_bg"
-                    android:text="Search Order"
-                    android:textAllCaps="false"
-                    android:enabled="false"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white" />
+
 
                 <Button
                     android:id="@+id/void_btn"
@@ -512,8 +542,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
                     android:text="Void"
-                    android:visibility="gone"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 
@@ -523,10 +553,10 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
                     android:text="Order Record"
                     android:textAllCaps="false"
-                    android:enabled="false"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white" />
             </LinearLayout>
 
 
@@ -556,8 +586,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
-                    android:text="Refund"
                     android:enabled="false"
+                    android:text="Refund"
                     android:textAllCaps="false"
                     android:textColor="@color/white"></Button>
 
@@ -567,7 +597,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
@@ -593,6 +622,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
                     android:text="capture"
                     android:textAllCaps="false"
                     android:textColor="@color/white"></Button>
@@ -616,39 +646,93 @@
                         android:layout_height="match_parent" />
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/query_member_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
+                    android:text="Search Member"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/query_oder_sign_btn"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:enabled="false"
                     android:layout_weight="1"
                     android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
                     android:text="Signature"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/today_tip_msg_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
+                    android:text="Tip"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/close_tip_msg_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
+                    android:text="Close Tip"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/today_report_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_red_bg"
+                    android:enabled="false"
+                    android:text="Today Report"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Request:"/>
+                android:text="Request:" />
 
             <TextView
                 android:id="@+id/param_tv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Response:"/>
+                android:text="Response:" />
 
             <TextView
                 android:id="@+id/result_tv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

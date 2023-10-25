@@ -1,5 +1,6 @@
 package com.hante.tcpdemo.net;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.GsonBuilder;
@@ -7,7 +8,10 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.hante.tcp.bean.v2.POSOrderQuery;
 import com.hante.tcpdemo.HantePayApplication;
+import com.hante.tcpdemo.bean.OrderInfo;
+import com.hante.tcpdemo.bean.OrderInfoResponse;
 import com.hante.tcpdemo.utils.NetworkStatusUtil;
 
 import java.io.File;
@@ -39,7 +43,7 @@ public class RetrofitFactory {
     private static final RetrofitFactory retrofitFactory = new RetrofitFactory();
     //TODO包名
     public static final String CACHE_NAME = "com.hante.hantepay";
-    public static final int DEFAULT_CONNECT_TIMEOUT = 30;
+    public static final int DEFAULT_CONNECT_TIMEOUT = 60;
     public static final int DEFAULT_WRITE_TIMEOUT = 60;
     public static final int DEFAULT_READ_TIMEOUT = 60;
 
@@ -232,6 +236,19 @@ public class RetrofitFactory {
     }
 
 
-
+    public Observable<OrderInfoResponse> queryOrder(String ip,POSOrderQuery bodyParams) {
+        StringBuilder sbUrl=new StringBuilder();
+        sbUrl.append("http://").append(ip).append(":10011/");
+        GsonBuilder builder = new GsonBuilder();
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(okHttpBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create(builder.setLenient().create()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl(sbUrl.toString())
+                .build();
+        return retrofit.create(HttpApi.class).queryOrder(bodyParams)
+                .subscribeOn(Schedulers.io())//IO线程异步请求
+                .observeOn(AndroidSchedulers.mainThread());//结果响应在主线程
+    }
 
 }

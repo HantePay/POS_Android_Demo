@@ -92,11 +92,15 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
-    //本地服务器
-    implementation "com.koushikdutta.async:androidasync:2.+"
 
     //权限授权
     implementation 'com.github.tbruyelle:rxpermissions:+'
+
+    //本地服务器
+    implementation "com.koushikdutta.async:androidasync:2.+"
+
+
+
 
 
 

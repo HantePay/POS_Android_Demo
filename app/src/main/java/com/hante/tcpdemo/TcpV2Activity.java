@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,16 +23,21 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
+import com.hante.tcp.TcpClient;
+import com.hante.tcp.bean.v2.POSOrderQuery;
 import com.hante.tcp.bean.v2.POSTransaction;
 import com.hante.tcp.callback.SocketCallback;
 import com.hante.tcp.util.HantePOSAPI;
 import com.hante.tcpdemo.bean.Constant;
+import com.hante.tcpdemo.bean.OrderInfo;
+import com.hante.tcpdemo.bean.OrderInfoResponse;
 import com.hante.tcpdemo.dialog.OrderInfoDialog;
 import com.hante.tcpdemo.dialog.PairingCodeDialog;
 import com.hante.tcpdemo.dialog.PaymentTipDialog;
 import com.hante.tcpdemo.dialog.TipDialog;
 import com.hante.tcpdemo.net.BaseCallBack;
 import com.hante.tcpdemo.net.BaseResponse;
+import com.hante.tcpdemo.net.HttpApi;
 import com.hante.tcpdemo.net.PosInfoResponse;
 import com.hante.tcpdemo.net.RetrofitFactory;
 import com.hante.tcpdemo.net.SimpleObserver;
@@ -46,6 +52,7 @@ import com.koushikdutta.async.http.server.HttpServerRequestCallback;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 import io.reactivex.annotations.NonNull;
@@ -71,7 +78,7 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
 
     private EditText reconnection_time_et;
 
-    private TextView reconnection_order_et;
+    private EditText reconnection_order_et;
 
 
 
@@ -149,6 +156,7 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
         status_tv=findViewById(R.id.status_tv);
         reconnection_time_et=findViewById(R.id.reconnection_time_et);
         reconnection_order_et=findViewById(R.id.reconnection_order_et);
+
         et_amount=findViewById(R.id.et_amount);
         et_amount_pro=findViewById(R.id.et_amount_pro);
         et_tax_amount=findViewById(R.id.et_tax_amount);
@@ -169,6 +177,7 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
         token_verify_code_et=findViewById(R.id.token_verify_code_et);
 
         oder_sign_img=findViewById(R.id.oder_sign_img);
+
 
 
 
@@ -348,6 +357,16 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
 
         findViewById(R.id.card_num_payment_btn).setOnClickListener(this);
 
+        findViewById(R.id.query_pos_order_btn).setOnClickListener(this);
+
+        findViewById(R.id.query_member_btn).setOnClickListener(this);
+
+        findViewById(R.id.today_report_btn).setOnClickListener(this);
+
+        findViewById(R.id.today_tip_msg_btn).setOnClickListener(this);
+
+        findViewById(R.id.close_tip_msg_btn).setOnClickListener(this);
+
 
         customDialog=new CustomDialog(this);
 
@@ -406,6 +425,26 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                 findViewById(R.id.refund_btn).setEnabled(s.length()>0);
             }
         });
+
+
+        reconnection_order_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                findViewById(R.id.query_pos_order_btn).setEnabled(s.length()>0);
+//                findViewById(R.id.refund_btn).setEnabled(s.length()>0);
+            }
+        });
+
 
         AsyncHttpServer server = new AsyncHttpServer();
         server.stop();
@@ -573,7 +612,7 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                     ToastUtils.show("Please enter the amount");
                     return;
                 }
-                refreshPromptDialog("void");
+                refreshPromptDialog("capture");
                 HantePOSAPI.capture(order_tr_et.getText().toString(),Integer.parseInt(capture_et.getText().toString()),Integer.parseInt(capture_tip_et.getText().toString()));
                 break;
 
@@ -582,7 +621,7 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                     ToastUtils.show("Please enter the transactionId");
                     return;
                 }
-                refreshPromptDialog("capture");
+                refreshPromptDialog("void");
                 HantePOSAPI.Void(order_tr_et.getText().toString());
                 break;
             case R.id.query_order_btn:
@@ -591,6 +630,47 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
                 HantePOSAPI.orderQuery(order_tr_et.getText().toString());
+                break;
+            case R.id.query_pos_order_btn:
+                POSOrderQuery posSendMessage = new POSOrderQuery();
+                posSendMessage.setOrderNo(reconnection_order_et.getText().toString());
+                posSendMessage.setMerchantNo(TcpClient.getInstance().getMerchantNo());
+                posSendMessage.setDeviceId(TcpClient.getInstance().getDeviceId());
+                TcpClient.getInstance().formatSign(posSendMessage);
+
+                RetrofitFactory.getInstance().queryOrder(ip_et.getText().toString(),posSendMessage).subscribe(new SimpleObserver<OrderInfoResponse>() {
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
+                    }
+
+
+                    @Override
+                    public void onNext(OrderInfoResponse response) {
+                        //请求成功
+                        if(null!=response){
+                            if("SUCCESS".equals(response.getResultCode())){
+                                paymentTipDialog.setPositiveButton(null);
+                                if(!paymentTipDialog.isShowing()){
+                                    paymentTipDialog.show();
+                                }
+                                String paymentMethod= response.getPaymentMethod();
+                                paymentTipDialog.refreshSuccess("$"+(response.getAmount()*0.01),paymentMethod);
+                            }else {
+                                if(!paymentTipDialog.isShowing()){
+                                    paymentTipDialog.show();
+                                }
+                                paymentTipDialog.refreshFail(response.getResultMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+                });
                 break;
             case R.id.checkout_ebt_btn:
                 if(TextUtils.isEmpty(et_amount.getText().toString())){
@@ -668,6 +748,19 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                 HantePOSAPI.sale("SALE"
                         ,Integer.parseInt(et_amount.getText().toString()),taxAmount,tipAmount,"POS_KEY_IN",randomOrderNo(),"测试");
                 break;
+            case R.id.query_member_btn:
+                HantePOSAPI.searchMember(1,"");
+                break;
+            case R.id.today_report_btn:
+                HantePOSAPI.report("20231001000000","20231025235959");
+                break;
+            case R.id.today_tip_msg_btn:
+                HantePOSAPI.tipMessage(true,"https://tupian.qqw21.com/article/UploadPic/2023-1/20231722375544866.jpg","提示消息1111");
+//                HantePOSAPI.transactionVoice(true);
+                break;
+            case R.id.close_tip_msg_btn:
+                HantePOSAPI.closeTipMessage();
+                break;
         }
     }
 
@@ -682,6 +775,15 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.card_num_payment_btn).setEnabled(b);
         findViewById(R.id.stop_connect_btn).setEnabled(b);
         findViewById(R.id.connect_btn).setEnabled(!b);
+        findViewById(R.id.query_member_btn).setEnabled(b);
+        findViewById(R.id.auth_btn).setEnabled(b);
+        findViewById(R.id.void_btn).setEnabled(b);
+        findViewById(R.id.capture_btn).setEnabled(b);
+        findViewById(R.id.today_report_btn).setEnabled(b);
+        findViewById(R.id.today_tip_msg_btn).setEnabled(b);
+        findViewById(R.id.close_tip_msg_btn).setEnabled(b);
+
+
     }
 
     private void refreshPromptDialog(String type) {
@@ -739,6 +841,8 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                     amount+=Double.parseDouble(capture_tip_et.getText().toString())*0.01;
                 }
                 paymentTipDialog.setCanClose(false).show("$"+amount,"Wait for capture");
+            }else if("searchMember".equals(type)){
+                tipDialog.show();
             }
 
             param_tv.setText(type);
@@ -1014,7 +1118,7 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
 //                                    Log.e("length",length+msg);
                                     result_tv.setText(length+msg);
                                     //判断消息是否完整
-                                    if(length!=msg.length()){
+                                    if(length!=msg.getBytes(StandardCharsets.UTF_8).length){
                                         cutMessageLength=length;
                                         cutMessage.append(msg);
                                         ToastUtils.show("消息被截断");
@@ -1049,16 +1153,15 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                                             JSONObject jsonObject=JSONObject.parseObject(cutMsgResult);
                                             String resultCode=jsonObject.getString("resultCode");
                                             String resultMsg=jsonObject.getString("resultMsg");
-                                            deviceSN=jsonObject.getString("deviceSN");
-                                            setStatus("Successful connection SN:"+deviceSN);
+                                            setStatus("Successful connection");
                                             if("SUCCESS".equals(resultCode)){
                                                 JSONArray tokenList= jsonObject.getJSONArray("tokenList");
                                                 if(null!=tokenList && !tokenList.isEmpty()){
                                                     JSONObject token=tokenList.getJSONObject(0);
                                                     if(null!=token){
                                                         SpUtils.getInstance().save(Constant.DATE_DEVICE_TOKEN,JSONObject.toJSONString(token));
-                                                        String deviceId=token.getString("deviceId");
-                                                        String tok=token.getString("token");
+                                                        String deviceId=token.getString("deviceId");//deviceId -> ht917685
+                                                        String tok=token.getString("token");//token -> iijfj8hrr2o4
                                                         if(!TextUtils.isEmpty(deviceId)){
                                                             if(!deviceId.equals(device_id_et.getText().toString())){
                                                                 device_id_et.setText(deviceId);
@@ -1131,14 +1234,8 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                                             if(null!=jsonObject){
                                                 String resultCode=jsonObject.getString("resultCode");
                                                 if("SUCCESS".equals(resultCode)){
-                                                    String orderNo=jsonObject.getString("orderNo");
-                                                    if(!TextUtils.isEmpty(orderNo)){
-                                                        String ip=ip_et.getText().toString();
-                                                        String imgUrl="http://"+ip+":5000/pos?action=orderSignature&orderNo="+orderNo;
-//                                                        Bitmap bitmap=ImageUtils.base64ToBitmap(base64Img);
-//                                                        if(null!=bitmap){
-//                                                            oder_sign_img.setImageBitmap(bitmap);
-//                                                        }
+                                                    String imgUrl=jsonObject.getString("imgUrl");
+                                                    if(!TextUtils.isEmpty(imgUrl)){
                                                         Glide.with(TcpV2Activity.this).load(imgUrl).into(oder_sign_img);
                                                     }
                                                 }
@@ -1170,7 +1267,7 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                                                     if("1".equalsIgnoreCase(customerSignature)){
                                                         paymentTipDialog.refreshMsg("Waiting for customer signature");
                                                     }
-                                                }else if("FAIL".equals(resultCode)){
+                                                }else{
                                                     if("Please Check the Token Whether to create".equals(resultMsg)){
                                                         paymentTipDialog.dismiss();
                                                         new PairingCodeDialog(TcpV2Activity.this).builder().setPositiveButton(new BaseCallBack<String>() {
@@ -1241,7 +1338,7 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                                                 paymentTipDialog.setPositiveButton(null);
                                                 if("SUCCESS".equals(resultCode)){
                                                     paymentTipDialog.refreshSuccess("");
-                                                }else if("FAIL".equals(resultCode)){
+                                                }else{
                                                     paymentTipDialog.refreshFail(resultMsg);
                                                 }
                                                 //判断是否需要回应消息
@@ -1260,7 +1357,7 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
 //                                                String paymentMethod=jsonObject.getString("paymentMethod");
                                                 if("SUCCESS".equals(resultCode)){
                                                     paymentTipDialog.refreshSuccess("");
-                                                }else if("FAIL".equals(resultCode)){
+                                                }else {
                                                     paymentTipDialog.refreshFail(resultMsg);
                                                 }
                                             }
@@ -1272,8 +1369,43 @@ public class TcpV2Activity extends AppCompatActivity implements View.OnClickList
                                                 String resultMsg=jsonObject.getString("resultMsg");
                                                 if("SUCCESS".equals(resultCode)){
                                                     paymentTipDialog.refreshSuccess("");
-                                                }else if("FAIL".equals(resultCode)){
+                                                }else {
                                                     paymentTipDialog.refreshFail(resultMsg);
+                                                }
+                                            }
+                                        }else if("searchMember".equals(orderBean.getType())){
+                                            JSONObject jsonObject=JSONObject.parseObject(cutMsgResult);
+                                            String resultCode=jsonObject.getString("resultCode");
+                                            String resultMsg=jsonObject.getString("resultMsg");
+                                            if("SUCCESS".equals(resultCode)){
+                                                if(tipDialog.isShowing()){
+                                                    tipDialog.dismiss();
+                                                }
+                                                StringBuilder memberSb=new StringBuilder();
+                                                String firstName=jsonObject.getString("firstName");
+                                                if(!TextUtils.isEmpty(firstName)){
+                                                    memberSb.append(firstName);
+                                                }
+                                                String lastName=jsonObject.getString("lastName");
+                                                if(!TextUtils.isEmpty(lastName)){
+                                                    memberSb.append(lastName);
+                                                }
+                                                String mobile=jsonObject.getString("mobile");
+                                                if(!TextUtils.isEmpty(mobile)){
+                                                    memberSb.append("(").append(mobile).append(")");
+                                                }
+                                                String balance=jsonObject.getString("balance");
+                                                if(!TextUtils.isEmpty(balance)){
+                                                    memberSb.append("Balance:").append(balance);
+                                                }
+                                                String integral=jsonObject.getString("integral");
+                                                tipDialog.show(memberSb.toString());
+                                            }else{
+                                                if(null!=resultCode){
+                                                    if(tipDialog.isShowing()){
+                                                        tipDialog.dismiss();
+                                                    }
+                                                    tipDialog.show(resultCode+":"+resultMsg);
                                                 }
                                             }
                                         }else{

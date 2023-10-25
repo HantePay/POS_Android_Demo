@@ -634,13 +634,17 @@ public class TcpV1Activity extends AppCompatActivity implements View.OnClickList
                 sendMsg(posSendMessage);
                 break;
             case R.id.query_order_btn://查询订单
-                if(!TextUtils.isEmpty(transaction_order_et.getText())){
+
                     posSendMessage.type = "search";
                     posSendMessage.merchantNo = merchant_et.getText().toString();
                     posSendMessage.deviceId = device_id_et.getText().toString();
-                    posSendMessage.transactionId=transaction_order_et.getText().toString();
+                    if(!TextUtils.isEmpty(reconnection_order_et.getText())){
+                        posSendMessage.orderNo=reconnection_order_et.getText().toString();
+                    }
+                    if(!TextUtils.isEmpty(transaction_order_et.getText())){
+                        posSendMessage.transactionId=transaction_order_et.getText().toString();
+                    }
                     sendMsg(posSendMessage);
-                }
                 break;
             case R.id.device_search_btn:
                 if(!TextUtils.isEmpty(device_sn_et.getText().toString())){
@@ -711,6 +715,7 @@ public class TcpV1Activity extends AppCompatActivity implements View.OnClickList
 
 
     private void sendMsg(SendMessage msg) {
+        Log.e("sendMsg",msg.toString());
         if(HantePOSAPI.isConnected()){
             param_tv.setText("Request:" + msg.toString());
             result_tv.setText("Response:");
